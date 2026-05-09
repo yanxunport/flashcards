@@ -16,7 +16,7 @@ export default function DeckList() {
             localStorage.getItem("user")
             );
       const res = await fetch(
-        "http://localhost:5000/api/decks",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/decks`,
         {
             headers: {
             Authorization: `Bearer ${user.token}`,
@@ -35,7 +35,7 @@ export default function DeckList() {
   const deleteDeck = async (id) => {
     try {
       await fetch(
-        `http://localhost:5000/api/decks/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/decks/${id}`,
         {
           method: "DELETE",
         }
@@ -51,7 +51,8 @@ export default function DeckList() {
 
   return (
     <div className="mt-8 grid gap-4">
-      {decks.map((deck) => (
+      {Array.isArray(decks) &&
+        decks.map((deck) => (
         <div
           key={deck._id}
           className="border border-green-200 rounded-2xl p-5 flex justify-between items-start gap-4 hover:shadow-md transition bg-white"

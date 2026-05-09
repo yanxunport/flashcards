@@ -15,7 +15,7 @@ export default function CreateDeck() {
 
     try {
       const res = await fetch(
-        "http://localhost:5000/api/decks",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/decks`,
         {
           method: "POST",
           headers: {

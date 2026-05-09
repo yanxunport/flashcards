@@ -21,7 +21,7 @@ export default function DeckPage({ params }) {
   const fetchDeck = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/decks/${deckId}`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/decks/${deckId}`
       );
 
       const data = await res.json();
@@ -37,7 +37,7 @@ export default function DeckPage({ params }) {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/decks/${deckId}/cards`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/decks/${deckId}/cards`,
         {
           method: "POST",
           headers: {
@@ -64,7 +64,7 @@ export default function DeckPage({ params }) {
   const deleteCard = async (cardId) => {
   try {
     const res = await fetch(
-      `http://localhost:5000/api/decks/${deckId}/cards/${cardId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/decks/${deckId}/cards/${cardId}`,
       {
         method: "DELETE",
       }

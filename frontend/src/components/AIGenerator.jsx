@@ -25,7 +25,7 @@ export default function AIGenerator() {
       );
 
       const res = await fetch(
-        "http://localhost:5000/api/decks",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/decks`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -46,7 +46,7 @@ export default function AIGenerator() {
       setError("");
 
       const res = await fetch(
-        "http://localhost:5000/api/ai/generate",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/ai/generate`,
         {
           method: "POST",
 
@@ -63,17 +63,25 @@ export default function AIGenerator() {
 
       const data = await res.json();
 
-      const cleaned =
-        data.result.replace(/'/g, '"');
+      const cleaned = data.result
+        .replace(/```json/g, "")
+        .replace(/```/g, "")
+        .replace(/\\"/g, '"')
+        .replace(/""/g, '"')
+        .replace(/\\n/g, "")
+        .trim();
+
+      console.log(cleaned);
 
       const parsed = JSON.parse(cleaned);
 
       setResult(parsed);
+
     } catch (error) {
       console.log(error);
 
       setError(
-        "AI service temporarily unavailable."
+        "Failed to generate valid flashcards."
       );
     }
   };
@@ -81,7 +89,7 @@ export default function AIGenerator() {
   const saveCardsToDeck = async () => {
     try {
       await fetch(
-        `http://localhost:5000/api/decks/${selectedDeck}/bulk-cards`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/decks/${selectedDeck}/bulk-cards`,
         {
           method: "POST",
 
@@ -128,7 +136,8 @@ export default function AIGenerator() {
           Select Deck
         </option>
 
-        {decks.map((deck) => (
+        {Array.isArray(decks) &&
+          decks.map((deck) => (
           <option
             key={deck._id}
             value={deck._id}

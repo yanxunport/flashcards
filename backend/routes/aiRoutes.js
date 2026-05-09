@@ -21,7 +21,7 @@ router.post("/generate", async (req, res) => {
           {
             role: "system",
             content:
-              "Generate concise flashcards from study notes. Return ONLY valid JSON array format like [{\"question\":\"\",\"answer\":\"\"}]",
+                "Return ONLY a valid JSON array using double quotes. No markdown, no explanations, no extra text. Format exactly like: [{\"question\":\"\",\"answer\":\"\"}]",
           },
 
           {
