@@ -20,7 +20,7 @@ export default function Navbar() {
           {user ? (
             <>
               <p className="text-gray-600">
-                {user.user.username}
+                {user?.username}
               </p>
 
               <button
