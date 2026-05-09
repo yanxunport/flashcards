@@ -12,7 +12,23 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://flashcards-six-jade.vercel.app",
+    ],
+
+    methods: [
+      "GET",
+      "POST",
+      "PUT",
+      "DELETE",
+    ],
+
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use("/api/decks", deckRoutes);
 app.use("/api/auth", authRoutes);
