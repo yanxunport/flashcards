@@ -46,7 +46,7 @@ export default function LoginPage() {
 
   return (
     <main className="max-w-md mx-auto mt-16 p-8 bg-white/40 backdrop-blur-md rounded-3xl shadow-xl border border-white/20">
-      <h1 className="text-4xl font-bold text-green-600 mb-8">
+      <h1 className="text-4xl font-bold text-green-700 mb-8">
         Login
       </h1>
 
